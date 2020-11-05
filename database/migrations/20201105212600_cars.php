@@ -11,10 +11,8 @@ final class Cars extends AbstractMigration
 
         $table->addColumn('brand_id', 'integer', ['signed' => false])
             ->addColumn('model_id', 'integer', ['signed' => false])
-            ->addColumn('year_min', 'char', ['limit' => 4])
-            ->addColumn('year_max', 'char', ['limit' => 4])
-            ->addColumn('price_min', 'decimal', ['precision' => 11, 'scale' => 2])
-            ->addColumn('price_max', 'decimal', ['precision' => 11, 'scale' => 2])
+            ->addColumn('year', 'char', ['limit' => 4])
+            ->addColumn('price', 'decimal', ['precision' => 11, 'scale' => 2])
             ->addColumn('city', 'string')
             ->addColumn('description', 'string', ['null' => true])
             ->addColumn('content', 'text', ['null' => true])

@@ -12,7 +12,7 @@ final class Categories extends AbstractMigration
         $table->addColumn('title', 'string')
             ->addColumn('slug', 'string')
             ->addColumn('description', 'text', ['null' => true])
-            ->addColumn('type', 'char', ['default' => 'product'])
+            ->addColumn('type', 'char', ['default' => 'brand'])
             ->addTimestamps()
             ->addIndex('slug', ['unique' => true])
             ->save();

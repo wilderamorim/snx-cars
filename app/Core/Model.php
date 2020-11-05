@@ -12,6 +12,9 @@ use CoffeeCode\DataLayer\DataLayer;
  */
 abstract class Model extends DataLayer
 {
+    /** @var array */
+    private $requiredFields = [];
+
     /**
      * Model constructor.
      * @param string $entity
@@ -22,5 +25,15 @@ abstract class Model extends DataLayer
     public function __construct(string $entity, array $required, string $primary = 'id', bool $timestamps = true)
     {
         parent::__construct($entity, $required, $primary, $timestamps);
+
+        $this->requiredFields = $required;
+    }
+
+    /**
+     * @return array
+     */
+    public function requiredFields(): array
+    {
+        return $this->requiredFields;
     }
 }

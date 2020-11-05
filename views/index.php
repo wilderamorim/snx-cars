@@ -23,6 +23,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= $route->route('web.home'); ?>">Home</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Carros
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="<?= $route->route('web.cars.index'); ?>">Ver Carros</a>
+                        <a class="dropdown-item" href="<?= $route->route('web.cars.create'); ?>">Novo Carro</a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -42,5 +51,7 @@
 
 <script src="<?= url('/node_modules/jquery/dist/jquery.min.js'); ?>"></script>
 <script src="<?= url('/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'); ?>"></script>
+<script src="<?= url('/node_modules/jquery-mask-plugin/dist/jquery.mask.min.js'); ?>"></script>
+<script src="<?= url('/views/assets/js/script.js'); ?>"></script>
 </body>
 </html>
