@@ -15,5 +15,7 @@
       "app/helpers.php"
     ]
   },
-  "require": {}
+  "require": {
+    "php": "^7.2"
+  }
 }

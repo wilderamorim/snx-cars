@@ -1,8 +1,5 @@
 <?php
-/**
- *
- * Created by PhpStorm.
- * User: Wilder Amorim
- * Date: 05/11/2020
- * Time: 16:49
- */
+
+
+define('SITE_URL', 'https://localhost/smart-nx/snx-cars');
+define('SITE_NAME', 'SNX Cars');
