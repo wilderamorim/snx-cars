@@ -11,8 +11,8 @@
                 <form action="" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-6 col-lg-3">
-                            <label class="d-none" for="make">Marca</label>
-                            <select name="make" id="make" class="form-control">
+                            <label class="d-none" for="brand_id">Marca</label>
+                            <select name="brand_id" id="brand_id" class="form-control">
                                 <option value="" selected disabled hidden>Marca</option>
                                 <?php for ($i = 1; $i <= 5; $i++): ?>
                                     <option value="">Audi</option>
@@ -20,8 +20,8 @@
                             </select>
                         </div>
                         <div class="form-group col-md-6 col-lg-3">
-                            <label class="d-none" for="model">Modelo</label>
-                            <select name="model" id="model" class="form-control">
+                            <label class="d-none" for="model_id">Modelo</label>
+                            <select name="model_id" id="model_id" class="form-control">
                                 <option value="" selected disabled hidden>Modelo</option>
                                 <?php for ($i = 1; $i <= 5; $i++): ?>
                                     <option value="">A3</option>
