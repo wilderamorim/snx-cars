@@ -7,6 +7,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\Car;
 use App\Models\Category;
+use App\Support\Formatter;
 
 class CarController extends Controller
 {
@@ -15,6 +16,7 @@ class CarController extends Controller
         echo $this->view->render('pages/cars/index', [
             'title' => 'Carros',
             'cars' => (new Car())->find()->fetch(true),
+            'brands' => (new Category())->scopeType(Category::TYPE_BRAND)->fetch(true),
         ]);
     }
 
@@ -35,7 +37,7 @@ class CarController extends Controller
         $car->brand_id = $data['brand_id'];
         $car->model_id = $data['model_id'];
         $car->year = $data['year'];
-        $car->price = str_replace(',', '.', str_replace('.', null, $data['price']));
+        $car->price = Formatter::moneyDb($data['price']);
         $car->city = $data['city'];
         $car->description = $data['description'];
         $car->content = $data['content'];
@@ -98,7 +100,7 @@ class CarController extends Controller
             $car->brand_id = $data['brand_id'];
             $car->model_id = $data['model_id'];
             $car->year = $data['year'];
-            $car->price = str_replace(',', '.', str_replace('.', null, $data['price']));
+            $car->price = Formatter::moneyDb($data['price']);
             $car->city = $data['city'];
             $car->description = $data['description'];
             $car->content = $data['content'];

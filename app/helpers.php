@@ -18,7 +18,15 @@ function url(?string $resource = null): string
  * @param string $method
  * @return string
  */
-function form_spoofing(string $method = 'PUT')
+function form_spoofing(string $method = 'PUT'): string
 {
     return "<input type=\"hidden\" name=\"_method\" value=\"$method\">";
+}
+
+/**
+ * @return \App\Support\Formatter
+ */
+function formatter(): \App\Support\Formatter
+{
+    return new \App\Support\Formatter();
 }

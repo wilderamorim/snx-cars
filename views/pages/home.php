@@ -8,75 +8,42 @@
         </header>
         <div class="card">
             <div class="card-body">
-                <form action="" method="post">
+                <form id="smartFilter" action="<?= $route->route('web.filter.redirect'); ?>" data-action="<?= $route->route('web.filter.filter'); ?>" method="post">
                     <div class="form-row">
-                        <div class="form-group col-md-6 col-lg-3">
-                            <label class="d-none" for="brand_id">Marca</label>
-                            <select name="brand_id" id="brand_id" class="form-control">
-                                <option value="" selected disabled hidden>Marca</option>
-                                <?php for ($i = 1; $i <= 5; $i++): ?>
-                                    <option value="">Audi</option>
-                                <?php endfor; ?>
+                        <div class="form-group col-md-6 col-lg-4">
+                            <label for="brand">Marca</label>
+                            <select name="brand" id="brand" class="form-control">
+                                <option value="all">Todas</option>
+                                <?php if ($brands): foreach ($brands as $brand): ?>
+                                    <option value="<?= $brand->id; ?>"><?= $brand->title; ?></option>
+                                <?php endforeach; endif; ?>
                             </select>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
-                            <label class="d-none" for="model_id">Modelo</label>
-                            <select name="model_id" id="model_id" class="form-control">
-                                <option value="" selected disabled hidden>Modelo</option>
-                                <?php for ($i = 1; $i <= 5; $i++): ?>
-                                    <option value="">A3</option>
-                                <?php endfor; ?>
+                        <div class="form-group col-md-6 col-lg-4">
+                            <label for="model">Modelo</label>
+                            <select name="model" id="model" class="form-control">
+                                <option value="all">Todos</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
-                            <label class="d-none" for="year_min">Ano Min.</label>
-                            <select name="year_min" id="year_min" class="form-control">
-                                <option value="" selected disabled hidden>Ano Min.</option>
-                                <?php for ($i = 1; $i <= 5; $i++): ?>
-                                    <option value="">200<?= $i; ?></option>
-                                <?php endfor; ?>
+                        <div class="form-group col-md-6 col-lg-4">
+                            <label for="year">Ano</label>
+                            <select name="year" id="year" class="form-control">
+                                <option value="all">Todos</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3">
-                            <label class="d-none" for="year_max">Ano Máx.</label>
-                            <select name="year_max" id="year_max" class="form-control">
-                                <option value="" selected disabled hidden>Ano Máx.</option>
-                                <?php for ($i = 1; $i <= 5; $i++): ?>
-                                    <option value="">200<?= $i; ?></option>
-                                <?php endfor; ?>
+                        <div class="form-group col-md-6 col-lg-4 mb-lg-0">
+                            <label for="price">Preço</label>
+                            <select name="price" id="price" class="form-control">
+                                <option value="all">Todos</option>
                             </select>
                         </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6 col-lg-3 mb-lg-0">
-                            <label class="d-none" for="price_min">Preço Min.</label>
-                            <select name="price_min" id="price_min" class="form-control">
-                                <option value="" selected disabled hidden>Preço Min.</option>
-                                <?php for ($i = 1; $i <= 5; $i++): ?>
-                                    <option value="">R$ 1.00<?= $i; ?></option>
-                                <?php endfor; ?>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6 col-lg-3 mb-lg-0">
-                            <label class="d-none" for="price_max">Preço Máx.</label>
-                            <select name="price_max" id="price_max" class="form-control">
-                                <option value="" selected disabled hidden>Preço Máx.</option>
-                                <?php for ($i = 1; $i <= 5; $i++): ?>
-                                    <option value="">R$ 1.00<?= $i; ?></option>
-                                <?php endfor; ?>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6 col-lg-3 mb-sm-0">
-                            <label class="d-none" for="city">Cidade</label>
+                        <div class="form-group col-md-6 col-lg-4 mb-sm-0">
+                            <label for="city">Cidade</label>
                             <select name="city" id="city" class="form-control">
-                                <option value="" selected disabled hidden>Cidade</option>
-                                <?php for ($i = 1; $i <= 5; $i++): ?>
-                                    <option value="">Juiz de Fora</option>
-                                <?php endfor; ?>
+                                <option value="all">Todas</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-6 col-lg-3 mb-0 d-flex align-items-end">
+                        <div class="form-group col-md-6 col-lg-4 mb-0 d-flex align-items-end">
                             <button type="submit" class="btn btn-primary btn-block">
                                 <i class="fas fa-search"></i>
                                 Buscar
@@ -96,21 +63,26 @@
         <header class="text-center mb-5">
             <h2>Últimos Carros</h2>
         </header>
-        <div class="row">
-            <?php for ($i = 1; $i <= 8; $i++): ?>
-                <div class="col-lg-3 mb-4">
-                    <article class="card">
-                        <img src="//placehold.it/426x240" alt="..." class="card-img-top">
-                        <div class="card-body">
-                            <h5 class="card-title">Lorem ipsum.</h5>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad asperiores
-                                aut culpa error, quam voluptates?</p>
-                            <a href="#" class="btn btn-primary">Call To Action</a>
-                        </div>
-                    </article>
-                </div>
-            <?php endfor; ?>
-        </div>
+        <?php if ($cars): ?>
+            <div class="row">
+                <?php foreach ($cars as $car): ?>
+                    <div class="col-lg-3 mb-4">
+                        <article class="card">
+                            <img src="//placehold.it/426x240" alt="..." class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $car->brand()->title . ' - ' . $car->model()->title; ?></h5>
+                                <p class="card-text"><?= $car->description; ?></p>
+                                <a href="#" class="btn btn-primary">Call To Action</a>
+                            </div>
+                        </article>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php else: ?>
+            <div class="alert alert-info" role="alert">
+                Não há carros cadastrados. <a href="<?= $route->route('web.cars.create'); ?>">Clique aqui</a> para cadastrar.
+            </div>
+        <?php endif; ?>
     </div>
 </section>
 <!--/listing-->

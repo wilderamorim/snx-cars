@@ -8,76 +8,48 @@
                 <aside class="col-md-4 col-lg-3 mb-4">
                     <div class="card">
                         <div class="card-body p-4">
-                            <form action="" method="post">
+                            <form id="smartFilter" action="<?= $route->route('web.filter.redirect'); ?>" data-action="<?= $route->route('web.filter.filter'); ?>" method="post">
                                 <div class="form-group">
-                                    <label class="d-none" for="brand_id">Marca</label>
-                                    <select name="brand_id" id="brand_id" class="form-control">
-                                        <option value="" selected disabled hidden>Marca</option>
-                                        <?php for ($i = 1; $i <= 5; $i++): ?>
-                                            <option value="">Audi</option>
-                                        <?php endfor; ?>
+                                    <label for="brand">Marca</label>
+                                    <select name="brand" id="brand" class="form-control">
+                                        <option value="all">Todas</option>
+                                        <?php if ($brands): foreach ($brands as $brand): ?>
+                                            <option value="<?= $brand->id; ?>"><?= $brand->title; ?></option>
+                                        <?php endforeach; endif; ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="d-none" for="model_id">Modelo</label>
-                                    <select name="model_id" id="model_id" class="form-control">
-                                        <option value="" selected disabled hidden>Modelo</option>
-                                        <?php for ($i = 1; $i <= 5; $i++): ?>
-                                            <option value="">A3</option>
-                                        <?php endfor; ?>
+                                    <label for="model">Modelo</label>
+                                    <select name="model" id="model" class="form-control">
+                                        <option value="all">Todos</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="d-none" for="year_min">Ano Min.</label>
-                                    <select name="year_min" id="year_min" class="form-control">
-                                        <option value="" selected disabled hidden>Ano Min.</option>
-                                        <?php for ($i = 1; $i <= 5; $i++): ?>
-                                            <option value="">200<?= $i; ?></option>
-                                        <?php endfor; ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="d-none" for="year_max">Ano Máx.</label>
-                                    <select name="year_max" id="year_max" class="form-control">
-                                        <option value="" selected disabled hidden>Ano Máx.</option>
-                                        <?php for ($i = 1; $i <= 5; $i++): ?>
-                                            <option value="">200<?= $i; ?></option>
-                                        <?php endfor; ?>
+                                    <label for="year">Year</label>
+                                    <select name="year" id="year" class="form-control">
+                                        <option value="all">Todos</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="d-none" for="price_min">Preço Min.</label>
-                                    <select name="price_min" id="price_min" class="form-control">
-                                        <option value="" selected disabled hidden>Preço Min.</option>
-                                        <?php for ($i = 1; $i <= 5; $i++): ?>
-                                            <option value="">R$ 1.00<?= $i; ?></option>
-                                        <?php endfor; ?>
+                                    <label for="price">Preço</label>
+                                    <select name="price" id="price" class="form-control">
+                                        <option value="all">Todos</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="d-none" for="price_max">Preço Máx.</label>
-                                    <select name="price_max" id="price_max" class="form-control">
-                                        <option value="" selected disabled hidden>Preço Máx.</option>
-                                        <?php for ($i = 1; $i <= 5; $i++): ?>
-                                            <option value="">R$ 1.00<?= $i; ?></option>
-                                        <?php endfor; ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label class="d-none" for="city">Cidade</label>
+                                    <label for="city">Cidade</label>
                                     <select name="city" id="city" class="form-control">
-                                        <option value="" selected disabled hidden>Cidade</option>
-                                        <?php for ($i = 1; $i <= 5; $i++): ?>
-                                            <option value="">Juiz de Fora</option>
-                                        <?php endfor; ?>
+                                        <option value="all">Todos</option>
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    <i class="fas fa-search"></i>
-                                    Buscar
-                                </button>
+                                <div class="d-flex align-items-end">
+                                    <button type="submit" class="btn btn-primary btn-block">
+                                        <i class="fas fa-search"></i>
+                                        Buscar
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -134,7 +106,7 @@
 <?php $v->start('js'); ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-    $('[data-action]').click(function () {
+    $('.btn-danger').click(function () {
         const action = $(this).data('action');
 
         Swal.fire({
