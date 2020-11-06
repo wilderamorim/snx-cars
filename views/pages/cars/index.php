@@ -97,6 +97,10 @@
                                         <h5 class="card-title"><?= $car->brand()->title . ' - ' . $car->model()->title; ?></h5>
                                         <p class="card-text"><?= $car->description; ?></p>
                                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                        <a href="<?= $route->route('web.cars.edit', ['car' => $car->id]); ?>" class="btn btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                            Editar
+                                        </a>
                                     </div>
                                 </div>
                             </div>

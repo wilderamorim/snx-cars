@@ -13,3 +13,12 @@ function url(?string $resource = null): string
 
     return SITE_URL;
 }
+
+/**
+ * @param string $method
+ * @return string
+ */
+function form_spoofing(string $method = 'PUT')
+{
+    return "<input type=\"hidden\" name=\"_method\" value=\"$method\">";
+}

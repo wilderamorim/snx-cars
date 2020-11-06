@@ -67,4 +67,72 @@ class CarController extends Controller
             'message' => 'Cadastrado com sucesso.'
         ]);
     }
+
+    public function edit(array $data)
+    {
+        $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
+        $id = filter_var($data['car'], FILTER_VALIDATE_INT);
+
+        $car = (new Car())->findById($id);
+        if (!$car) {
+            $this->route->redirect('web.cars.index');
+        }
+
+        echo $this->view->render('pages/cars/edit', [
+            'title' => 'Editar Carro',
+            'car' => $car,
+            'alert' => (object)filter_input_array(INPUT_GET, FILTER_SANITIZE_STRIPPED),
+            'brands' => (new Category())->scopeType(Category::TYPE_BRAND)->fetch(true),
+            'models' => (new Category())->scopeType(Category::TYPE_MODEL)->fetch(true),
+            'select' => function ($value, $field) use ($car) {
+                return ($car->$field == $value ? 'selected' : null);
+            },
+        ]);
+    }
+
+    public function update(array $data)
+    {
+        $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
+        $id = filter_var($data['car'], FILTER_VALIDATE_INT);
+
+        $car = (new Car())->findById($id);
+        if ($car) {
+            $car->brand_id = $data['brand_id'];
+            $car->model_id = $data['model_id'];
+            $car->year = $data['year'];
+            $car->price = str_replace(',', '.', str_replace('.', null, $data['price']));
+            $car->city = $data['city'];
+            $car->description = $data['description'];
+            $car->content = $data['content'];
+
+            //validator
+            foreach ($car->requiredFields() as $field) {
+                if (!$data[$field]) {
+                    $this->route->redirect('web.cars.edit', [
+                        'car' => $car->id,
+                        'type' => 'warning',
+                        'message' => 'Preencha todos os campos obrigatórios.'
+                    ]);
+                    return;
+                }
+            }
+
+            //error
+            if (!$car->save()) {
+                $this->route->redirect('web.cars.edit', [
+                    'car' => $car->id,
+                    'type' => 'danger',
+                    'message' => 'Não foi possível atualizar. Tente novamente.'
+                ]);
+                return;
+            }
+
+            //success
+            $this->route->redirect('web.cars.edit', [
+                'car' => $car->id,
+                'type' => 'success',
+                'message' => 'Atualizado com sucesso.'
+            ]);
+        }
+    }
 }
