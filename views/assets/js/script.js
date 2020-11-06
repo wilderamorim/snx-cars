@@ -32,19 +32,19 @@ const ajaxFilter = function () {
                     },
                     success: function (response) {
                         if (response.models) {
-                            form.find('select[name=model]').html(option + response.models);
+                            form.find('select[name=model]').html(option + response.models).focus().select();
                         }
 
                         if (response.years) {
-                            form.find('select[name=year]').html(option + response.years);
+                            form.find('select[name=year]').html(option + response.years).focus().select();
                         }
 
                         if (response.prices) {
-                            form.find('select[name=price]').html(option + response.prices);
+                            form.find('select[name=price]').html(option + response.prices).focus().select();
                         }
 
                         if (response.cities) {
-                            form.find('select[name=city]').html(option + response.cities);
+                            form.find('select[name=city]').html(option + response.cities).focus().select();
                         }
 
                         form.find('.align-items-end').html(activatedButton);

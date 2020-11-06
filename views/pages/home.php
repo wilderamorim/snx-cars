@@ -66,18 +66,22 @@
         <?php if ($cars): ?>
             <div class="row">
                 <?php foreach ($cars as $car): ?>
-                    <div class="col-lg-3 mb-4">
+                    <div class="col-lg-4 mb-4">
                         <article class="card">
-                            <img src="//placehold.it/426x240" alt="..." class="card-img-top">
+                            <img src="<?= asset('/images/lightning-mcqueen.jpg'); ?>" alt="Lightning McQueen" class="card-img-top">
                             <div class="card-body">
-                                <h5 class="card-title"><?= $car->brand()->title . ' - ' . $car->model()->title; ?></h5>
-                                <p class="card-text"><?= $car->description; ?></p>
-                                <a href="#" class="btn btn-primary">Call To Action</a>
+                                <h5 class="card-title"><?= $car->brand()->title . ' - ' . $car->model()->title . ' - ' . $car->year; ?></h5>
+                                <p class="card-text"><i class="fas fa-dollar-sign"></i> R$ <?= formatter()->moneyHuman($car->price); ?></p>
+                                <p class="card-text"><i class="fas fa-map-marker-alt"></i> <?= $car->city; ?></p>
+                                <p class="card-text"><i class="fas fa-file-alt"></i> <?= $car->description; ?></p>
                             </div>
                         </article>
                     </div>
                 <?php endforeach; ?>
             </div>
+            <footer class="text-center mt-4">
+                <a href="<?= $route->route('web.cars.index'); ?>" class="btn btn-primary btn-lg">Ver Mais Carros</a>
+            </footer>
         <?php else: ?>
             <div class="alert alert-info" role="alert">
                 Não há carros cadastrados. <a href="<?= $route->route('web.cars.create'); ?>">Clique aqui</a> para cadastrar.

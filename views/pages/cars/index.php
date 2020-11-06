@@ -71,13 +71,14 @@
                         <div class="card mb-4">
                             <div class="row no-gutters">
                                 <div class="col-md-4">
-                                    <img src="//placehold.it/426x240" alt="..." class="card-img">
+                                    <img src="<?= asset('/images/lightning-mcqueen.jpg'); ?>" alt="Lightning McQueen" class="card-img">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
-                                        <h5 class="card-title"><?= $car->brand()->title . ' - ' . $car->model()->title; ?></h5>
-                                        <p class="card-text"><?= $car->description; ?></p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                        <h5 class="card-title"><?= $car->brand()->title . ' - ' . $car->model()->title . ' - ' . $car->year; ?></h5>
+                                        <p class="card-text"><i class="fas fa-dollar-sign"></i> R$ <?= formatter()->moneyHuman($car->price); ?></p>
+                                        <p class="card-text"><i class="fas fa-map-marker-alt"></i> <?= $car->city; ?></p>
+                                        <p class="card-text"><i class="fas fa-file-alt"></i> <?= $car->description; ?></p>
 
                                         <a href="<?= $route->route('web.cars.edit', ['car' => $car->id]); ?>" class="btn btn-primary">
                                             <i class="fas fa-edit"></i>
