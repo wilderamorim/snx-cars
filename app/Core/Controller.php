@@ -31,6 +31,7 @@ abstract class Controller
         //shared view data
         $this->view->addData([
             'route' => $this->route,
+            'alert' => (object)filter_input_array(INPUT_GET, FILTER_SANITIZE_STRIPPED),
         ]);
     }
 }

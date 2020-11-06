@@ -22,7 +22,6 @@ class CarController extends Controller
     {
         echo $this->view->render('pages/cars/create', [
             'title' => 'Novo Carro',
-            'alert' => (object)filter_input_array(INPUT_GET, FILTER_SANITIZE_STRIPPED),
             'brands' => (new Category())->scopeType(Category::TYPE_BRAND)->fetch(true),
             'models' => (new Category())->scopeType(Category::TYPE_MODEL)->fetch(true),
         ]);
@@ -81,7 +80,6 @@ class CarController extends Controller
         echo $this->view->render('pages/cars/edit', [
             'title' => 'Editar Carro',
             'car' => $car,
-            'alert' => (object)filter_input_array(INPUT_GET, FILTER_SANITIZE_STRIPPED),
             'brands' => (new Category())->scopeType(Category::TYPE_BRAND)->fetch(true),
             'models' => (new Category())->scopeType(Category::TYPE_MODEL)->fetch(true),
             'select' => function ($value, $field) use ($car) {
@@ -132,6 +130,25 @@ class CarController extends Controller
                 'car' => $car->id,
                 'type' => 'success',
                 'message' => 'Atualizado com sucesso.'
+            ]);
+        }
+    }
+
+    public function destroy(array $data)
+    {
+        $data = filter_var_array($data, FILTER_SANITIZE_STRIPPED);
+        $id = filter_var($data['car'], FILTER_VALIDATE_INT);
+
+        $car = (new Car())->findById($id);
+        if ($car) {
+            $car->destroy();
+
+            //success
+            echo json_encode([
+                'redirect' => $this->route->route('web.cars.index', [
+                    'type' => 'success',
+                    'message' => 'Excluído com sucesso.'
+                ])
             ]);
         }
     }

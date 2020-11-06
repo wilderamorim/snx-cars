@@ -12,14 +12,12 @@
         <div class="row">
             <div class="col-8 mx-auto">
 
-                <?php if (!empty($alert->type) && !empty($alert->message)): ?>
-                    <div class="alert alert-<?= $alert->type; ?>" role="alert">
-                        <?= $alert->message; ?>
-                    </div>
-                <?php endif; ?>
+                <?= $v->insert('partials/alert'); ?>
 
                 <div class="card">
                     <div class="card-body p-5">
+                        <h5 class="card-title h3"><?= $title; ?></h5>
+                        <hr>
                         <form action="<?= $route->route('web.cars.update', ['car' => $car->id]); ?>" method="post">
                             <?= form_spoofing(); ?>
 

@@ -53,5 +53,6 @@
 <script src="<?= url('/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'); ?>"></script>
 <script src="<?= url('/node_modules/jquery-mask-plugin/dist/jquery.mask.min.js'); ?>"></script>
 <script src="<?= url('/views/assets/js/script.js'); ?>"></script>
+<?= $v->section('js'); ?>
 </body>
 </html>
